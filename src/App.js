@@ -16,24 +16,26 @@ export default class App extends React.Component {
     this.setState({language: (this.state.language === 'ID') ? 'EN' : 'ID'})
 
   render() {
+    const { language } = this.state;
     return (
       <BrowserRouter>
         <div id="page-wrapper">
           <header>
-            <TopBar language={this.state.language} onClick={this._toggleLanguage} />
-            <NavBar/>
+            <TopBar language={language} onClick={this._toggleLanguage} />
+            <NavBar language={language} />
           </header>
           <main className="container valign-wrapper">
             <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/menu1" component={Menu1} />
-              <Route path="/menu2" component={Menu2} />
-              <Route path="/menu3" component={Menu3} />
-              <Route path="/menu4" component={Menu4} />
-              <Route path="/menu5" component={Menu5} />
-              <Route path="/menu6" component={Menu6} />
-              <Route path="/login" component={Login} />
-              <Route path="/register" component={Register} />
+              <Route path="/:language" component={Home} />
+              <Route path="/menu1/:language" component={Menu1} />
+              <Route path="/menu2/:language" component={Menu2} />
+              <Route path="/menu3/:language" component={Menu3} />
+              <Route path="/menu4/:language" component={Menu4} />
+              <Route path="/menu5/:language" component={Menu5} />
+              <Route path="/menu6/:language" component={Menu6} />
+              <Route path="/login/:language" component={Login} />
+              <Route path="/register/:language" component={Register} />
+              <Route path="/" component={Home} />
               <Route component={NotFound}/>
             </Switch>
           </main>
@@ -46,25 +48,32 @@ export default class App extends React.Component {
 
 const NotFound = () => <h1> 404 Page Not Found </h1>
 
-const Home = () => <h1> Content HOME </h1>
-const Menu1 = () => <h1> Content MENU-1 </h1>
-const Menu2 = () => <h1> Content MENU-2 </h1>
-const Menu3 = () => <h1> Content MENU-3 </h1>
-const Menu4 = () => <h1> Content MENU-4 </h1>
-const Menu5 = () => <h1> Content MENU-5 </h1>
-const Menu6 = () => <h1> Content MENU-6 </h1>
-const Login = () => <h1> Login </h1>
-const Register = () => <h1> Register </h1>
+const Home = props => {
+console.log(props)
+  // if(this.props.route.language === 'EN')
+  if(true)
+    return <h1> Content HOME </h1>
+  else
+    return <h1> Konten RUMAH </h1>
+}
+const Menu1 = ({match}) => <h1> {match.params.language === 'EN' ? 'Content' : 'Konten'} MENU-1 </h1>
+const Menu2 = ({match}) => <h1> {match.params.language === 'EN' ? 'Content' : 'Konten'} MENU-2 </h1>
+const Menu3 = ({match}) => <h1> {match.params.language === 'EN' ? 'Content' : 'Konten'} MENU-3 </h1>
+const Menu4 = ({match}) => <h1> {match.params.language === 'EN' ? 'Content' : 'Konten'} MENU-4 </h1>
+const Menu5 = ({match}) => <h1> {match.params.language === 'EN' ? 'Content' : 'Konten'} MENU-5 </h1>
+const Menu6 = ({match}) => <h1> {match.params.language === 'EN' ? 'Content' : 'Konten'} MENU-6 </h1>
+const Login = ({match}) => <h1>{match.params.language === 'EN' ? 'Login' : 'Masuk'} </h1>
+const Register = ({match}) => <h1>{match.params.language === 'EN' ? 'Register' : 'Daftar'} </h1>
 
 const NavBar = props => (
   <div style={Styles.navBar}>
-    <NavBarItem text="logo" url="/" style={Styles.logo} />
-    <NavBarItem text="Menu-1" url="/menu1" />
-    <NavBarItem text="Menu-2" url="/menu2" />
-    <NavBarItem text="Menu-3" url="/menu3" />
-    <NavBarItem text="Menu-4" url="/menu4" />
-    <NavBarItem text="Menu-5" url="/menu5" />
-    <NavBarItem text="Menu-6" url="/menu6" />
+    <NavBarItem text="logo" url={`/${props.language}`} style={Styles.logo} />
+    <NavBarItem text="Menu-1" url={`/menu1/${props.language}`} />
+    <NavBarItem text="Menu-2" url={`/menu2/${props.language}`} />
+    <NavBarItem text="Menu-3" url={`/menu3/${props.language}`} />
+    <NavBarItem text="Menu-4" url={`/menu4/${props.language}`} />
+    <NavBarItem text="Menu-5" url={`/menu5/${props.language}`} />
+    <NavBarItem text="Menu-6" url={`/menu6/${props.language}`} />
   </div>
 )
 
