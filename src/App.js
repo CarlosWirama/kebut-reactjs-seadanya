@@ -5,20 +5,22 @@ import './App.css';
 
 export default class App extends React.Component {
 
-  constructor (props) {
-    super(props)
+  constructor () {
+    super()
     this.state = {
       language: 'ID',
     };
   }
+  
+  _toggleLanguage = () =>
+    this.setState({language: (this.state.language === 'ID') ? 'EN' : 'ID'})
 
   render() {
     return (
-
       <BrowserRouter>
         <div id="page-wrapper">
           <header>
-            <TopBar language={this.state.language}/>
+            <TopBar language={this.state.language} onClick={this._toggleLanguage} />
             <NavBar/>
           </header>
           <main className="container valign-wrapper">
@@ -111,15 +113,15 @@ const TopBar = props => (
   <div style={Styles.topbar}>
     <div className="container">
       <div className="right">
-        <div style={Styles.languageMenu}>
-          Language&nbsp;&nbsp;|&nbsp;&nbsp;{props.language}
+        <div style={Styles.languageMenu} onClick={props.onClick}>
+          {props.language==='EN' ? 'Language' : 'Bahasa'}&nbsp;&nbsp;|&nbsp;&nbsp;{props.language}
         </div>
         <Link to="/login" className="waves-effect waves-light" {...props}>
-          Login
+          {props.language==='EN' ? 'Login' : 'Masuk'}
         </Link>
         <span>&nbsp;&nbsp;/&nbsp;&nbsp;</span>
         <Link to="/register" className="waves-effect waves-light" {...props}>
-          Register
+          {props.language==='EN' ? 'Register' : 'Daftar'}
         </Link>
       </div>
     </div>
