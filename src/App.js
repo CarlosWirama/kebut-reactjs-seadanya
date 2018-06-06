@@ -9,18 +9,15 @@ import NavBar from './components/NavBar';
 import TopBar from './components/TopBar';
 import Footer from './components/Footer';
 import './App.css';
+import { decorate, observable, action } from "mobx";
+import { observer } from "mobx-react";
 
 export default class App extends React.Component {
 
-  constructor() {
-    super()
-    this.state = {
-      language: 'ID',
-    };
-  }
+  language = 'ID'
   
-  _toggleLanguage = e => {
-    this.setState({language: (this.state.language === 'ID') ? 'EN' : 'ID'})
+  _toggleLanguage = () => {
+    this.language = (this.language === 'ID') ? 'EN' : 'ID';
   }
 
   render() {
@@ -28,8 +25,8 @@ export default class App extends React.Component {
       <BrowserRouter>
         <div id="page-wrapper">
           <header>
-            <TopBar language={this.state.language} toggleClick={this._toggleLanguage} />
-            <NavBar lang={this.state.language} />
+            <TopBar language={this.language} toggleClick={this._toggleLanguage} />
+            <NavBar lang={this.language} />
           </header>
           <main className="container valign-wrapper">
             <Switch>
@@ -47,3 +44,9 @@ export default class App extends React.Component {
     );
   }
 }
+
+decorate(App, {
+    App: observer,
+    language: observable,
+    _toggleLanguage: action,
+});
