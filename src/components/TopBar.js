@@ -9,11 +9,11 @@ export default props => (
           {props.language==='EN' ? 'Language' : 'Bahasa'}&nbsp;&nbsp;|&nbsp;&nbsp;{props.language}
         </div>
         <div className="col s6 m3 l2">
-          <Link to="/login" className="waves-effect waves-light" {...props}>
+          <Link to={'/login/'+props.language} className="waves-effect waves-light" {...props}>
             {props.language==='EN' ? 'Login' : 'Masuk'}
           </Link>
           <span>&nbsp;&nbsp;/&nbsp;&nbsp;</span>
-          <Link to="/register" className="waves-effect waves-light" {...props}>
+          <Link to={'/register/'+props.language} className="waves-effect waves-light" {...props}>
             {props.language==='EN' ? 'Register' : 'Daftar'}
           </Link>
         </div>

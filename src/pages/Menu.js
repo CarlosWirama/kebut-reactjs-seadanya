@@ -1,4 +1,6 @@
 import React from 'react';
 
-export default props =>
-	<h1> Content MENU-{props.match.params.id} </h1>
+export default ({match}) =>
+	<h1>
+		{match.params.lang==='ID' ? 'Konten' : 'Content'} MENU-{match.params.id}
+	</h1>

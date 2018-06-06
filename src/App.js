@@ -29,14 +29,15 @@ export default class App extends React.Component {
         <div id="page-wrapper">
           <header>
             <TopBar language={this.state.language} toggleClick={this._toggleLanguage} />
-            <NavBar/>
+            <NavBar lang={this.state.language} />
           </header>
           <main className="container valign-wrapper">
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route path="/menu/:id" component={Menu} />
-              <Route path="/login" component={Login} />
-              <Route path="/register" component={Register} />
+              <Route path="/menu/:lang/:id" component={Menu} />
+              <Route path="/login/:lang" component={Login} />
+              <Route path="/register/:lang" component={Register} />
+              <Route path="/lang/:lang" component={Home} />
               <Route component={NotFound}/>
             </Switch>
           </main>
